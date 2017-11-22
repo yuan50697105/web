@@ -1,0 +1,71 @@
+/***********************************/
+/***********************************/
+/***********************************/
+.section_body {
+	padding: 20px 10px;
+}
+.section_body table {
+	width: 100%;
+	text-align: center;
+}
+.section_body thead {
+	background-color: #098400;
+}
+.section_body th {
+	line-height: 30px;
+	color: #ffffff;
+	font-weight: normal;
+	font-size: 14px;
+}
+.section_body td {
+	color: #666666;
+	line-height: 30px;
+	font-weight: normal;
+	font-size: 14px;
+}
+.section_body td a {
+	margin: 0 2px;
+	color: #666666;
+}
+.section_body td a:hover {
+	color: blue;
+}
+.container {
+	padding-bottom: 50px;
+}
+/********function*********/
+.function {
+	
+}
+.function .sidebar_body {
+	padding-top: 0;
+}
+.function ul {
+
+}
+.function li {
+	padding-bottom: 10px;
+	background: url('../images/dotted_1.gif') repeat-x left bottom;
+}
+.function li p {
+
+}
+.function li span {
+	padding-top: 26px;
+	padding-bottom: 18px;
+	font-size: 14px;
+	color: #333333;
+}
+.function li label {
+	color: #666666;
+	margin-right: 17px;
+}
+.function label input {
+	margin-right: 10px;
+	vertical-align: middle;
+	border: 1px solid #cccccc;
+	background-color: #e5e5e5;
+}
+.function select {
+	color: #666666;
+}

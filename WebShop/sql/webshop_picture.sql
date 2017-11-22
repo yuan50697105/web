@@ -1,0 +1,1 @@
+INSERT INTO webshop.picture (imageURL, goodsid) VALUES ('aaa', 1);

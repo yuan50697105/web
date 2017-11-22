@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.mapper.PictureMapper">
+    <resultMap type="com.web.bean.Picture" id="base">
+        <id property="id" column="id"/>
+        <result property="imageURL" column="imageURL"/>
+        <result property="isEnd" column="isEnd"/>
+        <association property="goods" column="goodsid"
+                     select="com.web.mapper.GoodsMapper.getById"/>
+    </resultMap>
+    <insert id="save" parameterType="com.web.bean.Picture"
+            keyColumn="id" keyProperty="id">
+        <selectKey keyColumn="id" keyProperty="id" resultType="int" order="AFTER">
+            SELECT
+            last_insert_id() AS id
+        </selectKey>
+        INSERT INTO picture (imageURL, goodsid) VALUES
+        (#{imageURL},#{goods.id})
+    </insert>
+    <delete id="delete">
+        DELETE FROM picture
+        WHERE id = #{id}
+    </delete>
+    <update id="update" parameterType="com.web.bean.Picture">
+        UPDATE picture
+        SET
+            imageURL = #{imageURL}, goodsid = #{goods.id}
+        WHERE id = #{id}
+    </update>
+    <select id="getById" resultMap="base">
+        SELECT *
+        FROM picture
+        WHERE
+            id = #{id}
+    </select>
+    <select id="listAll" resultMap="base">
+        SELECT *
+        FROM picture
+    </select>
+    <select id="listByGoodsTitle" resultMap="base">
+        SELECT *
+        FROM picture
+        WHERE goodsid IN (SELECT *
+                          FROM goods
+                          WHERE
+                              title LIKE concat('%', #{title}, '%');
+    </select>
+</mapper>

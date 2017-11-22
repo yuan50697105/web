@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<#assign ctx=request.contextPath>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/bootstrap-responsive.css"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/admin-right.css"/>
+    <script type="text/javascript" src="${ctx}/js/jquery-1.11.0.js"></script>
+    <script type="text/javascript" src="${ctx}/js/jquery-migrate-1.2.1.js"></script>
+
+    <script src="${ctx}/js/artDialog-6.0.2/dist/dialog-min.js"></script>
+    <link rel="stylesheet" href="${ctx}/js/artDialog-6.0.2/css/ui-dialog.css">
+    <script>
+        $("#backid").click(function () {
+            window.location = "${ctx}/admin/order/list"
+        });
+    </script>
+</head>
+
+<body>
+<button id="backid">返回列表</button>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>订单编号</th>
+        <th>商品编号</th>
+        <th>商品名称</th>
+        <th>商品数量</th>
+        <th>商品价格</th>
+        <th>优惠价</th>
+    </tr>
+    </thead>
+    <tbody>
+    <#if items??>
+        <#list items as list>
+        <tr>
+            <td>${list.orderid!}</td>
+            <td>${list.goods.id!}</td>
+            <td>${list.goods.title!}</td>
+            <td>${list.sum!}</td>
+            <td>${list.goods.price!}</td>
+            <td>${list.goods.favoritePrice!}</td>
+        </tr>
+        </#list>
+    </#if>
+    </tbody>
+</table>
+</body>
+
+</html>

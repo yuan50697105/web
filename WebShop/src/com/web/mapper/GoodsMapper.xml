@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.mapper.GoodsMapper">
+    <resultMap type="com.web.bean.Goods" id="base">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="brandName" column="brandName"/>
+        <result property="image" column="image"/>
+        <result property="detail" column="detail"/>
+        <result property="price" column="price"/>
+        <result property="favoritePrice" column="favoritePrice"/>
+        <result property="repertory" column="repertory"/>
+        <result property="createDate" column="createDate"/>
+        <association property="goodsType" column="type"
+                     select="com.web.mapper.GoodsTypeMapper.getById"/>
+    </resultMap>
+    <insert id="save" parameterType="com.web.bean.Goods"
+            keyProperty="id" keyColumn="id">
+        <selectKey keyColumn="id" keyProperty="id" resultType="int"
+                   order="AFTER">
+            SELECT last_insert_id() AS id
+        </selectKey>
+        INSERT INTO goods(title, brandName, detail, image, type, price,
+        favoritePrice, repertory)
+        VALUES
+        (#{title},#{brandName},#{detail},#{image},#{goodsType.id},#{price},
+        #{favoritePrice},#{repertory})
+    </insert>
+    <delete id="delete">
+        DELETE FROM goods
+        WHERE id = #{id}
+    </delete>
+    <update id="update">
+        UPDATE goods
+        SET
+            title     = #{title}, brandName = #{brandName}, detail = #{detail},
+            image     = #{image}, type = #{goodsType.id}, price = #{price}, favoritePrice = #{favoritePrice},
+            repertory = #{repertory}
+        WHERE id = #{id}
+    </update>
+    <select id="getById" resultMap="base">
+        SELECT *
+        FROM goods
+        WHERE
+            id = #{id}
+    </select>
+    <select id="listAll" resultMap="base">
+        SELECT *
+        FROM goods
+    </select>
+    <select id="listByConditon" resultMap="base">
+        SELECT *
+        FROM goods
+        WHERE
+            title LIKE concat('%', #{condition}, '%') OR
+            brandName LIKE
+            concat('%', #{condition}, '%') OR type IN (SELECT id
+                                                       FROM
+                                                           goodstype
+                                                       WHERE
+                                                           name LIKE concat('%', #{condition}, '%') AND fatherid
+                                                                                                        &lt;&gt; 0)
+            OR type
+               IN (SELECT id
+                   FROM goodstype
+                   WHERE fatherid IN (SELECT fatherid
+                                      FROM
+                                          goodstype
+                                      WHERE name LIKE concat('%', #{condition}, '%') AND
+                                            fatherid = 0))
+    </select>
+    <select id="listByType" resultMap="base">
+        SELECT *
+        FROM goods
+        WHERE type
+              = #{type} OR type IN (SELECT id
+                                    FROM goodstype
+                                    WHERE fatherid =
+                                          #{type})
+    </select>
+</mapper>

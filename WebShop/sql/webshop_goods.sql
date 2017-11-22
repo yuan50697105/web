@@ -1,0 +1,1 @@
+INSERT INTO webshop.goods (title, brandName, detail, image, type, price, favoritePrice, repertory, createDate) VALUES ('111', '11', '', null, 3, 1111.11, 11, 11, '2017-10-26 16:31:07');

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.mapper.UserMapper">
+    <resultMap type="com.web.bean.User" id="base">
+        <id property="id" column="id"/>
+        <result property="userid" column="userid"/>
+        <result property="password" column="password"/>
+        <result property="role" column="role"/>
+        <result property="email" column="email"/>
+        <result property="phone" column="phone"/>
+        <result property="name" column="name"/>
+        <result property="activeStatus" column="activeStatus"/>
+        <result property="activeCode" column="activeCode"/>
+        <result property="createDate" column="createDate"/>
+    </resultMap>
+    <insert id="save" parameterType="com.web.bean.User" keyColumn="id"
+            keyProperty="id">
+        <selectKey keyColumn="id" keyProperty="id" resultType="int" order="AFTER">
+            SELECT
+            last_insert_id() AS id
+        </selectKey>
+        INSERT INTO user(userid, password, email, phone,address, activeCode) VALUES
+        (#{userid},#{password},#{email},#{phone},#{address},#{activeCode})
+    </insert>
+    <delete id="delete">
+        DELETE FROM user
+        WHERE id = #{id}
+    </delete>
+    <update id="updateInfo" parameterType="com.web.bean.User">
+        UPDATE user
+        SET
+            password = #{password}, name = #{name}, email = #{email}, phone = #{phone}, role = #{role},
+            address  = #{address}
+        WHERE id = #{id}
+    </update>
+    <update id="updateActiveStatus">
+        UPDATE user
+        SET activeStatus = 1
+        WHERE userid = #{userid}
+    </update>
+    <select id="getById" resultMap="base">
+        SELECT *
+        FROM user
+        WHERE id = #{id}
+    </select>
+    <select id="getByUserid" resultMap="base">
+        SELECT *
+        FROM user
+        WHERE
+            userid = #{userid}
+    </select>
+    <select id="getByUseridAndPassowrd" resultMap="base">
+        SELECT *
+        FROM user
+        WHERE userid = #{userid} AND password = #{password}
+    </select>
+    <select id="listAll" resultMap="base">
+        SELECT *
+        FROM user
+    </select>
+    <select id="listByUserid" resultMap="base">
+        SELECT *
+        FROM user
+        WHERE userid LIKE concat('%', #{userid}, '%')
+    </select>
+</mapper>

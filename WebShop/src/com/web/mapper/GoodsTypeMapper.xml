@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.mapper.GoodsTypeMapper">
+    <resultMap type="com.web.bean.GoodsType" id="base">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="detail" column="detail"/>
+        <result property="fatherid" column="fatherid"/>
+    </resultMap>
+    <insert id="save" parameterType="com.web.bean.GoodsType"
+            keyColumn="id" keyProperty="id">
+        <selectKey keyColumn="id" keyProperty="id" resultType="int" order="AFTER">
+            SELECT
+            last_insert_id() AS id
+        </selectKey>
+        INSERT INTO goodstype (name, detail,fatherid) VALUES
+        (#{name},#{detail},#{fatherid});
+    </insert>
+    <delete id="delete">
+        DELETE FROM goodstype
+        WHERE id = #{id}
+    </delete>
+    <update id="update" parameterType="com.web.bean.GoodsType">
+        UPDATE goodstype
+        SET
+            name = #{name}, detail = #{detail}, fatherid = #{fatherid}
+        WHERE id = #{id};
+    </update>
+    <select id="getById" resultMap="base">
+        SELECT *
+        FROM goodstype
+        WHERE
+            id = #{id}
+    </select>
+    <select id="listAll" resultMap="base">
+        SELECT *
+        FROM goodstype
+    </select>
+    <select id="listByName" resultMap="base">
+        SELECT *
+        FROM goodstype
+        WHERE
+            name LIKE concat('%', #{name}, '%')
+    </select>
+    <select id="listFatherTypes" resultMap="base">
+        SELECT *
+        FROM goodstype
+        WHERE fatherid = 0;
+    </select>
+    <select id="listChildType" resultMap="base">
+        SELECT *
+        FROM goodstype
+        WHERE fatherid = #{fatherid} AND fatherid &lt;&gt; 0
+    </select>
+    <select id="getFatherTypName" resultType="string">
+        SELECT name
+        FROM goodstype
+        WHERE fatherid = #{id}
+    </select>
+</mapper>

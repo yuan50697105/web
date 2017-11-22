@@ -1,0 +1,124 @@
+<#macro header_top>
+    <#assign ctx=request.contextPath>
+<div class="header_top">
+
+    <div class="container">
+
+        <div class="header_tl">
+
+            <p>
+                欢迎来到酷漫居！
+                <#if user??>
+                ${user.userid}<a href="${ctx}/customer/loginOut">注销</a>
+                <#else>
+                    <a href="${ctx}/customer/toLogin">请登录</a> <a href="${ctx}/toRegistor">免费注册</a>
+                </#if>
+            </p>
+
+        </div>
+
+        <div class="header_tr">
+
+            <p>
+
+                <a href="${ctx}/shopCar/show"><img src="${ctx}/img/shop.png"/> 购物车</a>
+                <a href="user.html">会员中心</a>
+                <a href="${ctx}/customer/order/listUserOrder">我的订单</a>
+                <a href="###">我的收藏</a>
+                <a href="###">网站导航</a>
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+</#macro>
+<#macro header_con>
+    <#assign ctx=request.contextPath>
+<div class="header_con">
+
+    <div class="container">
+        <a href="${ctx}/index" class="header_cl"> <img src="${ctx}/img/logo.png"/> </a>
+        <a href="${ctx}/shopCar/show" class="header_cr"> <img src="${ctx}/img/shop2.png"/> 加入购物车 </a>
+        <form class="search" action="${ctx}/goods/search">
+            <input type="text" name="condition" value="${condition!}"/><input type="submit" value="搜索"/><br/>
+            <p>
+                <a href="${ctx}/goods/search/儿童床" class="on">儿童床</a>
+                <a href="${ctx}/goods/search/儿童被子">儿童被子</a>
+                <a href="${ctx}/goods/search/儿童枕头">儿童枕头</a>
+                <a href="${ctx}/goods/search/儿童床垫">儿童床垫</a>
+                <a href="${ctx}/goods/search/儿童毛毯">儿童毛毯</a>
+                <a href="s${ctx}/goods/search/儿童服装">儿童服装</a>
+            </p>
+
+        </form>
+
+    </div>
+
+</div>
+
+<div class="nav">
+
+    <div class="container">
+
+        <ul id="nav">
+
+            <li class="on"><a href="${ctx}/goods/search">全部商品分类<img src="${ctx}/img/sjx.png"/></a>
+
+                <dl id="types"></dl>
+
+            </li>
+
+            <li><a href="${ctx}/index">首页</a></li>
+
+            <li><a href="${ctx}/goods/search/服装">服装馆</a></li>
+
+            <li><a href="${ctx}/goods/search/家具">家具日用馆</a></li>
+
+            <li><a href="${ctx}/goods/search/新品">新品专区</a></li>
+
+            <li><a href="user.html">会员俱乐部</a></li>
+
+        </ul>
+
+    </div>
+
+</div>
+</#macro>
+<#macro header>
+    <#assign ctx=request.contextPath>
+<div class="header">
+    <#import "header.html" as head>
+    <@head.header_top/>
+    <@head.header_con/>
+</div>
+</#macro>
+<#macro headerjs>
+    <#assign ctx=request.contextPath/>
+<script>
+
+    var url = "${ctx}/goods/type";
+    $(function () {
+        $.getJSON("${ctx}/listAllTypesByAjax", function (data) {
+            $.each(data, function (i, type) {
+                var fd = $("<dd></dd>");
+                var h2 = $("<h2></h2>");
+                var fa = $("<a></a>").attr("href", url + "/" + type.fType.id).text(type.fType.name);
+                fa.appendTo(h2);
+                h2.appendTo(fd);
+                var img = $("<img>").attr("src", "${ctx}/img/sjx2.png");
+                img.appendTo(fd);
+                var p = $("<p></p>");
+                $.each(type.cTypes, function (j, ctype) {
+                    var ca = $("<a></a>").attr("href", url + "/" + ctype.id).text(ctype.name);
+                    ca.appendTo(p);
+                });
+                p.appendTo(fd);
+                fd.appendTo("#types");
+            });
+        });
+    });
+</script>
+</#macro>

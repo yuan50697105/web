@@ -1,0 +1,6 @@
+@charset "utf-8";
+.main{width: 960px;float: right;}
+.main h1{float: left;width: 960px;font-size: 16px;font-weight: normal;text-align: center;margin-bottom: 10px;}
+.main i{float: left;display: block;width: 960px;text-align: center;line-height: 24px;font-size: 14px;color: #666666;}
+.main p{float: left;width: 960px;font-size: 14px;color: #666666;padding: 16px 0;}
+.main img{float: left;width: 600px;height: 400px;padding: 16px 0;margin-left: 50%;position: relative;left: -300px;}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<#assign ctx=request.contextPath>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/bootstrap-responsive.css"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/admin-right.css"/>
+    <script type="text/javascript" src="${ctx}/js/jquery-1.11.0.js"></script>
+    <script type="text/javascript" src="${ctx}/js/jquery-migrate-1.2.1.js"></script>
+
+    <script src="${ctx}/js/artDialog-6.0.2/dist/dialog-min.js"></script>
+    <link rel="stylesheet" href="${ctx}/js/artDialog-6.0.2/css/ui-dialog.css">
+    <script type="text/javascript">
+        var deleteById = function (id) {
+            var d = dialog({
+                title: '温馨提示',
+                content: '<img src=${ctx}/images/logo2.png><br><font size=6 color=red>您确定要删除对应的数据吗?</font>',
+                okValue: '确定',
+                ok: function () {
+                    this.title("请稍等...");
+                    window.location = "${ctx}/admin/picture/delete?id=" + id;
+                    return false;
+                },
+                cancelValue: '取消',
+                cancel: function () {
+                }
+            });
+            d.showModal();
+        }
+        var toAddPage = function () {
+            window.location = "${ctx}/admin/picture/toSave";
+        }
+    </script>
+</head>
+
+<body>
+<form class="form-inline definewidth m20" action="${ctx}/admin/picture/list" method="post">
+    <input type="text" name="title" id="name" class="abc input-default" placeholder="请输入需要查询的商品名称" value="${title!}">&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp;
+    <button type="button" class="btn btn-primary" onclick="toAddPage()">添加</button>
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>轮播图片</th>
+        <th>商品名称</th>
+        <th colspan="2" style="text-align:center">操作</th>
+    </tr>
+    </thead>
+<#if page??>
+    <#list page.list as picture>
+        <tr>
+            <td>
+                <#if picture.imageURL??>
+                    <img width="200" height="100" src="${ctx+picture.imageURL}" alt="图片不存在"/>
+                <#else>
+                    <span style="color: red;">图片不存在</span>
+                </#if>
+
+            </td>
+            <td>${picture.goods.title!}</td>
+            <td>
+                <a href="${ctx}/admin/picture/toUpdate?id=${picture.id}">修改</a>
+            </td>
+            <td>
+                <a href="JavaScript:deleteById(${picture.id});">删除</a>
+            </td>
+        </tr>
+    </#list>
+</#if>
+</table>
+<#if page??>
+    <#import "/common/pager.html" as pager>
+    <@pager.pager pageIndex=page.pageNum pageSize=page.pageSize recordCount=page.total toURL="${ctx}/admin/picture/list?title=${title!}"/>
+</#if>
+</html>

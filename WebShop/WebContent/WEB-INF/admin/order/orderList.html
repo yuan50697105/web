@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<#assign ctx=request.contextPath>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/bootstrap-responsive.css"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/admin-right.css"/>
+    <script type="text/javascript" src="${ctx}/js/jquery-1.11.0.js"></script>
+    <script type="text/javascript" src="${ctx}/js/jquery-migrate-1.2.1.js"></script>
+
+    <script src="${ctx}/js/artDialog-6.0.2/dist/dialog-min.js"></script>
+    <link rel="stylesheet" href="${ctx}/js/artDialog-6.0.2/css/ui-dialog.css">
+
+    <script type="text/javascript">
+        var deleteById = function (id) {
+            var d = dialog({
+                title: '温馨提示',
+                content: '<img src=${ctx}/images/logo2.png><br><font size=6 color=red>您确定要删除对应的数据吗?</font>',
+                okValue: '确定',
+                ok: function () {
+                    this.title("请稍等...");
+                    window.location = "${ctx}/admin/order/delete?id=" + id;
+                    return false;
+                },
+                cancelValue: '取消',
+                cancel: function () {
+                }
+            });
+            d.showModal();
+        }
+    </script>
+</head>
+
+<body>
+<form class="form-inline definewidth m20" action="${ctx}/admin/order/list" method="post">
+    <input type="text" name="condition" id="order" class="abc input-default" placeholder="请输入需要查询的用户订单号"
+           value="${condition!}">&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">查询</button> &nbsp;&nbsp;
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>用户名称</th>
+        <th>订单号</th>
+        <th>订单总价</th>
+        <th>创建时间</th>
+        <th>配送时间</th>
+        <th>支付状态</th>
+        <th>完成状态</th>
+        <th colspan="2" style="text-align: center">操作</th>
+    </tr>
+    </thead>
+<#if page.list??>
+    <#list page.list as order>
+        <tr>
+            <td>${order.user.userid!}</td>
+            <td>${order.orderid!}</td>
+            <td>${order.totalPrice!}</td>
+            <td>${(order.createTime?string("yyyy-MM-dd hh:mm:ss"))!}</td>
+            <td>${(order.sendTime?string("yyyy-MM-dd hh:mm:ss"))!}</td>
+            <td>
+                <#if order.alipay==1>
+                    <font color="green">已支付</font>
+                <#else>
+                    <font color="red">未支付</font>
+                </#if>
+            </td>
+            <td>
+                <#switch order.sendStatus>
+                    <#case -1>
+                        <font color="red">已取消</font>
+                        <#break>
+                    <#case 0>
+                        <font color="yellow">未支付</font>
+                        <#break>
+                    <#case 1>
+                        <font color="blue">正在配货</font>
+                        <#break >
+                    <#case 2>
+                        <font color="#00ffff">正在配送</font>
+                        <#break >
+                    <#case 3>
+                        <font color="green">已完成</font>
+                        <#break>
+                </#switch>
+            </td>
+            <td>
+                <a href="${ctx}/admin/order/toUpdate?id=${order.id}">更新状态</a>
+            </td>
+            <td>
+                <a href="${ctx}/admin/order/list/items?id=${order.id}">查看详情</a>
+            </td>
+        </tr>
+    </#list>
+</#if>
+</table>
+<#if page??>
+    <#import "/common/pager.html" as pager>
+    <@pager.pager pageIndex=page.pageNum pageSize=page.pageSize recordCount=page.total toURL="${ctx}/admin/order/list?condition=${condition!}"/>
+</#if>
+</body>
+
+</html>

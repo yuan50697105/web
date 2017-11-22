@@ -1,0 +1,36 @@
+@charset "utf-8";
+/* reset css */
+body,h1,h2,h3,h4,h5,p,dl,dd,ul,ol,form,input,textarea,th,td,select { margin:0; padding:0; }
+em { font-style:normal; }
+li { list-style:none; }
+a { text-decoration:none; color:#000;}
+img { border:none; vertical-align:top; }
+table { border-collapse:collapse; }
+input,textarea { outline:none; }
+textarea { resize:none; overflow:auto; }
+body { font-size:12px; font-family:"微软雅黑"; overflow-x:hidden;}
+.clear{ zoom:1;}
+.clear:after{ content:""; display:block; clear:both;}
+.fl{ float:left;}
+.fr{ float:right;}
+
+/* public css */
+.search{ width:200px; height:32px; background:url(../images/search.png) no-repeat;}
+.search .text{ height:32px; line-height:32px; padding-left:10px; border:none; background:none; color:#bdbdbd; vertical-align:middle;}
+.search .submit{ width:32px; height:32px; border:none; background:none; cursor:pointer; vertical-align:middle;}
+.selectBtn{ width:87px; height:32px; cursor:pointer; background:#c32c33; vertical-align:middle; border:none; color:#FFF;}
+.globalBg{ background:rgba(0,0,0,0.6); position:absolute; left:0; top:0; z-index:1000;}
+.dialog{ border-radius:5px; position:absolute; left:0; top:0; z-index:1001; left:50%; margin-left:-420px; top:50px; display:none; background:#f4f1e8;}
+#service-dialog{ margin-left:-150px;}
+.dialog h3{ border-radius:5px 5px 0 0; height:34px; color:#ffffff; font-size:12px; padding-left:8px; background:#c32c33; line-height:34px;}
+.dialog .close{ position:absolute; right:8px; top:4px; cursor:pointer;}
+.dialog .content{  width:840px; border-bottom:#94928d 1px dashed; padding:20px 0px;}
+.dialog .content ul{ display:block;}
+.dialog .content li{ float:left; height:50px; line-height:50px; padding-left:20px;}
+.dialog .content li span{ padding-left:20px;}
+
+.selectTitle{ float:left; padding-right:6px; position:relative; vertical-align:middle;}
+.selectTitle h3{ height:29px; width:168px; line-height:29px; text-indent:24px; cursor:pointer; background:#FFF url(../images/selectBg.png) 144px center no-repeat; border:#c8c8c8 1px solid;}
+.selectList{ position:absolute; left:0; top:31px; border:#c8c8c8 1px solid; border-top:none; background:#FFF; width:168px;}
+.selectList li{ text-align:center; border-bottom:#CCC 1px dashed; height:32px; line-height:32px;}
+.selectList a{ display:block;}

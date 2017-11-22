@@ -1,0 +1,49 @@
+@charset "utf-8";
+.content .product {
+    width: 984px;
+    float: right;
+    margin: 0 -24px 20px 0;
+}
+
+.content .product li {
+    float: left;
+    width: 222px;
+    height: 222px;
+    margin: 0 24px 22px 0;
+}
+
+.content .product .img {
+    display: block;
+    width: 222px;
+    height: 178px;
+}
+
+.content .product img {
+    width: 222px;
+    height: 178px;
+    float: left;
+}
+
+.content .product p {
+    float: left;
+    height: 44px;
+    text-align: center;
+    background: #d8d8d8;
+}
+
+.content .product p a {
+    position: relative;
+    display: block;
+    width: 222px;
+    height: 44px;
+    padding-top: 12px;
+    float: left;
+}
+
+.content .product li:hover p {
+    background: #1DCF85;
+}
+
+.content .product li:hover a {
+    color: #FFFFFF;
+}

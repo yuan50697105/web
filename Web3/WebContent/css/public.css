@@ -1,0 +1,30 @@
+@charset "utf-8";
+.content{width: 1200px;margin: 0 auto;padding: 40px 0;overflow: hidden;}
+.banner a{display: block;width: 1920px; height: 600px;}
+.banner img{margin-left: 50%;left: -960px; width: 1920px; height: 600px;position: absolute;}
+.sidebar{float: left;width: 200px;}
+.sidebar .sidebar_title{width: 200px;height: 110px;float: left;background: #1dcf85;}
+.sidebar div h2{font-size: 20px;font-weight: normal;text-align: center;padding-top: 36px;color: #fff;cursor: default;}
+.sidebar div h3{font-size: 14px;font-weight: normal;text-align: center;padding-top: 6px;color: #fff;cursor: default;}
+.sidebar ul{float: left;width: 198px;border: 1px solid #1DCF85;}
+.sidebar ul li a{display: block;width: 172px;line-height: 28px;text-align: center;margin: 0 auto;padding: 10px 0;}
+.sidebar ul li a:hover{background: url(../img/sidebar_bg.png) no-repeat center center;color: #FFFFFF;}
+.sidebar .current{background: url(../img/sidebar_bg.png) no-repeat center center;}
+.sidebar .current a{color: #FFFFFF;}
+.location{width: 960px;float: right;padding-bottom: 10px;background: url(../img/dotted.png) repeat-x bottom;margin-bottom: 34px;}
+.location img{float: left;margin: 8px 10px 0 0;}
+.location h2{font-weight: normal;font-size: 18px;cursor: default;}
+.location h2 span{font-family: "arial";cursor: default;}
+.search{width: 200px;margin-top: 50px;float: left;}
+.search .search_title{float: left;width: 200px;height: 110px;background: #1dcf85;float: left;}
+.search .search_title h2{font-size: 20px;font-weight: normal;text-align: center;padding-top: 36px;color: #fff;}
+.search .search_title h3{font-size: 14px;font-weight: normal;text-align: center;padding-top: 6px;color: #fff;}
+.search .search_input{position: relative;width: 198px;float: left;border: 1px solid #1DCF85;}
+.search .search_input form{width: 170px;height: 36px;margin: 10px 14px;border: 1px solid #c4c4c4;}
+.search .search_input form .text{background: none;width: 130px;height: 36px;border: none;float: left;padding: 0 8px;font-size: 16px;color: #333333;font-family: "微软雅黑";line-height: 36px;}
+.search .search_input form .button{width: 20px; height: 20px; float: right; padding: 8px 4px 8px 0;}
+.page{width: 960px;float: right;}
+.page ul{display: inline-block;margin-left: 290px;}
+.page ul li{float: left;margin: 0 3px;}
+.page ul li a{display: block;line-height: 28px;padding: 0 10px;font-size: 12px;color: #666666;background: #e6e6e6;}
+.page ul .on a,.page ul li:hover a{color: #FFFFFF;background: #1DCF85;}

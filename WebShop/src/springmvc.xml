@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+    <mvc:annotation-driven/>
+    <mvc:default-servlet-handler/>
+    <context:component-scan base-package="com.web.controller"/>
+    <mvc:view-controller path="/" view-name="redirect:/index"/>
+    <mvc:view-controller path="/admin" view-name="redirect:/admin/toLogin"/>
+    <bean class="com.web.intercepter.AdminLoginIntercepter" id="adminLoginIntercepter"/>
+    <bean class="com.web.intercepter.CustomerLoginIntercepter" id="customerLoginIntercepter"/>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/*"/>
+            <mvc:exclude-mapping path="/admin/toLogin"/>
+            <mvc:exclude-mapping path="/admin/login"/>
+            <ref bean="adminLoginIntercepter"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/customer/order/*"/>
+            <mvc:mapping path="/customer/center/*"/>
+            <mvc:mapping path="/customer/address/*"/>
+            <mvc:exclude-mapping path="/customer/order/getPayResult"/>
+            <ref bean="customerLoginIntercepter"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    <bean
+            class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="templateLoaderPaths" value="/,/WEB-INF/admin"/>
+    </bean>
+    <bean
+            class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="suffix" value=".html"/>
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <property name="requestContextAttribute" value="request"/>
+
+    </bean>
+    <bean
+            class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+            id="multipartResolver"/>
+
+</beans>

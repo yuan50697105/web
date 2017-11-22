@@ -1,0 +1,112 @@
+@charset "utf-8";
+.sidebar ul li {
+    color: #1DCF85;
+    width: 160px;
+    font-size: 14px;
+    line-height: 28px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px 0;
+    cursor: default;
+}
+
+.sidebar .top {
+    border-bottom: 1px solid #1DCF85;
+    font-family: "arial";
+}
+
+.content .map {
+    width: 960px;
+    height: 446px;
+    float: right;
+    margin-bottom: 54px;
+    font-size: 14px;
+}
+
+.content .msg {
+    width: 960px;
+    float: right;
+}
+
+.content .msg form {
+    width: 510px;
+    float: left;
+}
+
+.content .msg form h2 {
+    font-size: 20px;
+    font-weight: normal;
+    margin-bottom: 4px;
+    cursor: default;
+}
+
+.content .msg form div {
+    margin-top: 12px;
+    float: left;
+}
+
+.content .msg form div label {
+    float: left;
+    line-height: 30px;
+}
+
+.content .msg form div input {
+    float: left;
+    width: 262px;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 8px;
+    margin-left: 16px;
+    border: 1px solid #dddddd;
+    font-size: 16px;
+    font-family: "微软雅黑";
+    color: #333333;
+}
+
+.content .msg form div textarea {
+    width: 418px;
+    height: 96px;
+    margin-left: 16px;
+    padding: 8px;
+    border: 1px solid #dddddd;
+}
+
+.content .msg form .code img {
+    margin-left: 12px;
+    width: 70px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.content .msg form .button input {
+    width: 94px;
+    height: 28px;
+    background: #E6E6E6;
+    font-size: 14px;
+    border: 1px solid #DDDDDD;
+    margin-left: 68px;
+    cursor: pointer;
+}
+
+.content .msg form .button input:hover {
+    color: #FFFFFF;
+    background: #1DCF85;
+    border-color: #1DCF85;
+}
+
+.content .msg dl {
+    width: 380px;
+    float: right;
+}
+
+.content .msg dl dt {
+    font-size: 20px;
+    margin-bottom: 4px;
+    cursor: default;
+}
+
+.content .msg dl dd {
+    font-size: 14px;
+    line-height: 30px;
+    margin-top: 12px;
+}

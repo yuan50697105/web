@@ -1,0 +1,65 @@
+/****************************************************/
+/****************************************************/
+/****************************************************/
+/****************************************************/
+h1,h2,h3,h4,h5,h6,
+div,
+span,
+p,
+font,
+a,
+i,
+s,
+b,
+table,
+thead,
+tbody,
+th,
+td,
+tfoot,
+input,
+form,
+ul,li,
+body{ 
+	padding: 0px;
+	 margin: 0px; 
+	 font-size: 12px;
+	  font-family: 'Simsun';
+}
+i,s,b,em{ display: inline-block;}
+img { 
+	border: 0px none; 
+}
+li { list-style: none;}
+a { 
+	color: black; 
+	text-decoration: none;
+}
+em {
+	font-style: normal;
+}
+span {
+	display: inline-block;
+}
+table {
+	border-collapse: collapse;
+}
+input { outline: none;}
+textarea {
+	resize: none;
+}
+/********************背景颜色****************************/
+.bg-f2f2f2 { background-color: #f2f2f2;}
+.bg-white,
+.bg-ffffff { background-color: #ffffff;}
+.bg-e6e6e6 { background-color: #e6e6e6;}
+/***********************字体颜色**********************************/
+.c-333333 { color: #333333;}
+.c-666666 { color: #666666;}
+/***********************字体大小**********************************/
+.f24 { font-size: 24px; font-family: 'Microsoft Yahei';}
+.f14 {font-size: 14px ;font-family: 'Simsun';}
+/***********************padding*********************************/
+.t-p40 { padding-bottom: 40px;} 
+/***********************margin*********************************/
+.t-m20 { margin-top: 20px;}

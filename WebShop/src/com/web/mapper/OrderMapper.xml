@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.mapper.OrderMapper">
+    <resultMap type="com.web.bean.Order" id="base">
+        <result property="id" column="id"/>
+        <result property="orderid" column="orderid"/>
+        <result property="totalPrice" column="totalPrice"/>
+        <result property="createTime" column="createTime"/>
+        <result property="sendTime" column="sendTime"/>
+        <result property="sendStatus" column="sendStatus"/>
+        <result property="alipay" column="alipay"/>
+        <result property="alipayTime" column="alipayTime"/>
+        <result property="sendAddress" column="sendAddress"/>
+        <association property="user" column="userid" select="com.web.mapper.UserMapper.getById"/>
+    </resultMap>
+    <insert id="save" parameterType="com.web.bean.Order" keyColumn="id"
+            keyProperty="id">
+        <selectKey keyColumn="id" keyProperty="id" resultType="int" order="AFTER">
+            SELECT last_insert_id() as id
+        </selectKey>
+        INSERT INTO orderlist (orderid, userid, totalPrice, sendAddress) VALUES
+        (#{orderid},#{user.id},#{totalPrice},#{sendAddress})
+    </insert>
+    <delete id="delete">
+        DELETE FROM orderlist
+        WHERE id = #{id}
+    </delete>
+    <update id="updateSendStatus">
+        UPDATE orderlist
+        SET sendStatus = #{status}
+        WHERE id = #{id};
+    </update>
+    <update id="updateAlipayStatus">
+        UPDATE orderlist
+        SET alipay = 1, alipayTime = now(),sendStatus=1,sendTime=now()
+        WHERE orderid = #{orderid}
+    </update>
+    <select id="getById" resultMap="base">
+        SELECT *
+        FROM orderlist
+        WHERE id = #{id}
+    </select>
+    <select id="listAll" resultMap="base">
+        SELECT *
+        FROM orderlist
+    </select>
+    <select id="listByCondition" resultMap="base">
+        SELECT *
+        FROM orderlist
+        WHERE orderid LIKE concat('%', #{condition}, '%') OR userid IN
+                                                             (SELECT id
+                                                              FROM user
+                                                              WHERE user.userid LIKE concat('%', #{condition}, '%'))
+    </select>
+    <select id="listByUserid" resultMap="base">
+        SELECT *
+        FROM orderlist
+        WHERE
+            userid = #{userid}
+    </select>
+    <select id="listByUseridAndCondition" resultMap="base">
+        SELECT *
+        FROM
+            orderlist
+        WHERE
+            userid = #{id} AND orderid LIKE
+                               concat('%', #{condition}, '%')
+    </select>
+    <select id="getByOrderid" resultMap="base">
+        SELECT *
+        FROM orderlist
+        WHERE orderid = #{orderid}
+    </select>
+    <update id="updateSendStatusFinish">
+        UPDATE orderlist
+        SET sendStatus = 3, sendTime = now()
+        WHERE id = #{id}
+    </update>
+</mapper>

@@ -1,0 +1,25 @@
+@charset "utf-8";
+.main{width: 960px;float: right;}
+.main .parameter{width: 920px;float: right;}
+.main .parameter img{float: left;width: 414px;height: 384px;border: 2px solid #60ac89;}
+.main .parameter dl{width: 470px;float: right;}
+.main .parameter dl dt{font-size: 18px;line-height: 58px;}
+.main .parameter dl dd{font-size: 14px;line-height: 24px;padding-bottom: 38px;}
+.main .parameter dl dd p{font-size: 14px;line-height: 24px;}
+.main .text{width: 920px;float: right;padding-top: 32px;}
+.main .text li{padding-bottom: 40px;}
+.main .text li p{font-size: 14px;line-height: 24px;}
+.main .recommend{width: 960px;overflow: hidden;position: relative;}
+.main .recommend ul{width: 980px;}
+.main .recommend li{float: left;border: 2px solid #b5b5b5;margin-right: 16px;width: 224px;height: 204px;}
+.main .recommend li p{text-align: center;}
+.main .recommend li p a{display: block;width: 224px;float: left;padding: 8px 0;font-size: 12px;}
+.main .recommend li i{float: left;}
+.main .recommend .img{display: block; width: 224px; height: 170px;}
+.main .recommend img{float: left;width: 224px;height: 170px;}
+.main .recommend li:hover{border: 2px solid #1DCF85;}
+.main .recommend li:hover a{color: #1DCF85;}
+.main .recommend .prev{display: block;width: 34px;height: 34px;background: url(../img/pro_prev.png) no-repeat;position: absolute;left: 4px;top: 40%;}
+.main .recommend .next{display: block;width: 34px;height: 34px;background: url(../img/pro_next.png) no-repeat;position: absolute;right: 4px;top: 40%;}
+.main .recommend .prev:hover{background: url(../img/pro_prev_hover.png) no-repeat;}
+.main .recommend .next:hover{background: url(../img/pro_next_hover.png) no-repeat;}

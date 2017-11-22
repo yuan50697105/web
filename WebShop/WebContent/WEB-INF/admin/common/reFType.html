@@ -1,0 +1,14 @@
+<#macro ftype selectId>
+    <#assign ctx=request.contextPath>
+<script>
+    $(function () {
+        $.getJSON("${ctx}/admin/goodsType/listFatherTypeByAjax", function (data) {
+            var select = $("#${selectId}");
+            $.each(data, function (i, item) {
+                var option = $("<option></option>").val(item.id).text(item.name);
+                option.appendTo(select);
+            });
+        });
+    });
+</script>
+</#macro>

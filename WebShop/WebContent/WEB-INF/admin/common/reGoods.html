@@ -1,0 +1,14 @@
+<#macro goodsList selectId>
+    <#assign ctx=request.contextPath>
+<script>
+    $(function () {
+        var select = $("#${selectId}");
+        $.getJSON("${ctx}/admin/goods/listAllGoodsByAjax", function (data) {
+            $.each(data, function (i, item) {
+                var option = $("<option></option>").val(item.id).text(item.title);
+                option.appendTo(select);
+            });
+        });
+    });
+</script>
+</#macro>
